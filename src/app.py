@@ -9,7 +9,7 @@ st.title('Rellena estos campos, para saber si un paciente ha sufrido un infarto 
 col1, col2 = st.columns(2)  # con las columnas haremos más agradable el cuestionario
 
 with col1:
-    gender = st.selectbox('Genero: ',('Hombre', 'Mujer', 'Indefinido'))
+    gender = st.selectbox('Genero: ',('Hombre', 'Mujer'))
     age = st.number_input('Edad: ',step=1, min_value=0, max_value=120)
     hipertension = st.checkbox('Padece de Hipertensión')
     heart_des = st.checkbox('Padece de alguna enfermedad cardiaca')
@@ -38,7 +38,7 @@ else:
 
 
 if st.button('Submit'):
-    X = pd.DataFrame([[gender,age,hiper,heart,marry,work,residence,glucosa,imc,smoke]],columns=['gender','age','hypertension','heart_disease','ever_married','work_type','Residence_type','avg_glucose_level','bmi','smoking_status'])
+    X = pd.DataFrame([[gender,age,hiper,heart,marry,work,glucosa,imc,smoke]],columns=['gender','age','hypertension','heart_disease','ever_married','work_type','avg_glucose_level','bmi','smoking_status'])
     X = X.replace(['Hombre','Mujer'],[0,1])
     X = X.replace(['Joven', 'Funcionario', 'Desempleado','Privado','Autónomo'],[0,1,2,3,4])
     X = X.replace(['A veces', 'Nunca', 'Habitual','Desconocido'],[0,1,2,3])
