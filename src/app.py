@@ -17,7 +17,6 @@ with col1:
 
 with col2:
     work = st.selectbox('Tipo de trabajo: ',('Joven', 'Funcionario', 'Desempleado','Privado','Autónomo'))
-    residence = st.selectbox('Genero: ',('Rural', 'Urbana'))
     glucosa = st.number_input('Nivel de glucosa en sangre: ',step=1, min_value=50, max_value=299)
     imc = st.number_input('Indice de masa corporal: ',step=1, min_value=12, max_value=49)
     smoke = st.selectbox('Fumador: ',('A veces', 'Nunca', 'Habitual','Desconocido'))
@@ -40,9 +39,8 @@ else:
 
 if st.button('Submit'):
     X = pd.DataFrame([[gender,age,hiper,heart,marry,work,residence,glucosa,imc,smoke]],columns=['gender','age','hypertension','heart_disease','ever_married','work_type','Residence_type','avg_glucose_level','bmi','smoking_status'])
-    X = X.replace(['Hombre','Mujer','Indefinido'],[0,1,2])
+    X = X.replace(['Hombre','Mujer'],[0,1])
     X = X.replace(['Joven', 'Funcionario', 'Desempleado','Privado','Autónomo'],[0,1,2,3,4])
-    X = X.replace(['Rural', 'Urbana'],[0,1])
     X = X.replace(['A veces', 'Nunca', 'Habitual','Desconocido'],[0,1,2,3])
     res = clf.predict(X)
     st.write(f'{res} ha sufrido un infarto')
