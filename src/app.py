@@ -45,7 +45,4 @@ if st.button('Submit'):
     X = X.replace(['Rural', 'Urbana'],[0,1])
     X = X.replace(['A veces', 'Nunca', 'Habitual','Desconocido'],[0,1,2,3])
     res = clf.predict(X)
-    if res:
-        st.text(f'El paciente ha sufrido un infarto cerebral')
-    else:
-        st.text(f'El paciente NO ha sufrido un infarto cerebral')
+    st.write(f'{res} ha sufrido un infarto')
