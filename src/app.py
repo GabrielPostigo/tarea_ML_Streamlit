@@ -46,8 +46,6 @@ if st.button('Submit'):
     st.write('DataFrame después de la sustitución:')
     st.write(X)
 
-    res = clf.predict(X)
-    # Resto del código...
 
     res = clf.predict(X)
     if res == 0:
