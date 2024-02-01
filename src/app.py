@@ -17,6 +17,7 @@ with col1:
 
 with col2:
     work = st.selectbox('Tipo de trabajo: ',('Joven', 'Funcionario', 'Desempleado','Privado','Autónomo'))
+    residence = st.selectbox('Tipo de Residencia: ',('Urbano', 'Rural'))
     glucosa = st.number_input('Nivel de glucosa en sangre: ',step=1, min_value=50, max_value=299)
     imc = st.number_input('Indice de masa corporal: ',step=1, min_value=12, max_value=49)
     smoke = st.selectbox('Fumador: ',('A veces', 'Nunca', 'Habitual','Desconocido'))
@@ -29,13 +30,15 @@ marry = 1 if casado else 0
 if st.button('Submit'):
     st.write('Realizando la predicción...')
     
-    X = pd.DataFrame([[gender, age, hiper, heart, marry, work, glucosa, imc, smoke]],
-                     columns=['gender', 'age', 'hypertension', 'heart_disease', 'ever_married', 'work_type', 'avg_glucose_level', 'bmi', 'smoking_status'])
+    X = pd.DataFrame([[gender, age, hiper, heart, marry, work, residence,glucosa, imc, smoke]],
+                     columns=['gender', 'age', 'hypertension', 'heart_disease', 'ever_married', 'work_type', 'Residence_type','avg_glucose_level', 'bmi', 'smoking_status'])
     
+    residence_mapping = {'Urbano':0, 'Rural':1}
     gender_mapping = {'Hombre': 0, 'Mujer': 1}
     work_mapping = {'Joven': 0, 'Funcionario': 1, 'Desempleado': 2, 'Privado': 3, 'Autónomo': 4}
     smoke_mapping = {'A veces': 0, 'Nunca': 1, 'Habitual': 2, 'Desconocido': 3}
     
+    X['Residence_type'] = X['Residence_type'].map(residence_mapping)
     X['gender'] = X['gender'].map(gender_mapping)
     X['work_type'] = X['work_type'].map(work_mapping)
     X['smoking_status'] = X['smoking_status'].map(smoke_mapping)
