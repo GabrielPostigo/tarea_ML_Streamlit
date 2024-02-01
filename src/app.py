@@ -22,29 +22,21 @@ with col2:
     smoke = st.selectbox('Fumador: ',('A veces', 'Nunca', 'Habitual','Desconocido'))
 
 # Los checkboxs devuelven booleano, haciendo esto funcionará
-if hipertension:
-    hiper = 1
-else:
-    hiper = 0
-
-if heart_des:
-    heart = 1
-else:
-    heart = 0
-if casado:
-    marry = 1
-else:
-    marry = 0
+hiper = 1 if hipertension else 0
+heart = 1 if heart_des else 0
+marry = 1 if casado else 0
 
 
 if st.button('Submit'):
-    # X = pd.DataFrame([[gender,age,hiper,heart,marry,work,glucosa,imc,smoke]],columns=['gender','age','hypertension','heart_disease','ever_married','work_type','avg_glucose_level','bmi','smoking_status'])
-    # X = X.replace(['Hombre','Mujer'],[0,1])
-    # X = X.replace(['Joven', 'Funcionario', 'Desempleado','Privado','Autónomo'],[0,1,2,3,4])
-    # X = X.replace(['A veces', 'Nunca', 'Habitual','Desconocido'],[0,1,2,3])
-    X = pd.DataFrame([[0.0,74.00,1.0,1.0,0.0,0.0,70.09,27.4,0.0]],columns=['gender','age','hypertension','heart_disease','ever_married','work_type','avg_glucose_level','bmi','smoking_status'])
+    X = pd.DataFrame([[gender,age,hiper,heart,marry,work,glucosa,imc,smoke]], columns=['gender','age','hypertension','heart_disease','ever_married','work_type','avg_glucose_level','bmi','smoking_status'])
+    gender_mapping = {'Hombre': 0, 'Mujer': 1}
+    work_mapping = {'Joven': 0, 'Funcionario': 1, 'Desempleado': 2, 'Privado': 3, 'Autónomo': 4}
+    smoke_mapping = {'A veces': 0, 'Nunca': 1, 'Habitual': 2, 'Desconocido': 3}
+    X['gender'] = X['gender'].map(gender_mapping)
+    X['work_type'] = X['work_type'].map(work_mapping)
+    X['smoking_status'] = X['smoking_status'].map(smoke_mapping)
     res = clf.predict(X)
     if res == 0:
         st.write('No ha sufrido un infarto antes')
     else:
-        st.write('Ha sufrido un infarto anteriormente')
+        st.write('SI ha sufrido un infarto anteriormente')
