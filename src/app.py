@@ -32,9 +32,6 @@ if st.button('Submit'):
     X = pd.DataFrame([[gender, age, hiper, heart, marry, work, glucosa, imc, smoke]],
                      columns=['gender', 'age', 'hypertension', 'heart_disease', 'ever_married', 'work_type', 'avg_glucose_level', 'bmi', 'smoking_status'])
     
-    st.write('DataFrame antes de la sustitución:')
-    st.write(X)
-    
     gender_mapping = {'Hombre': 0, 'Mujer': 1}
     work_mapping = {'Joven': 0, 'Funcionario': 1, 'Desempleado': 2, 'Privado': 3, 'Autónomo': 4}
     smoke_mapping = {'A veces': 0, 'Nunca': 1, 'Habitual': 2, 'Desconocido': 3}
@@ -42,13 +39,9 @@ if st.button('Submit'):
     X['gender'] = X['gender'].map(gender_mapping)
     X['work_type'] = X['work_type'].map(work_mapping)
     X['smoking_status'] = X['smoking_status'].map(smoke_mapping)
-    
-    st.write('DataFrame después de la sustitución:')
-    st.write(X)
-
 
     res = clf.predict(X)
     if res == 0:
         st.write('No ha sufrido un infarto antes')
-    else:
+    elif res == 1:
         st.write('SI ha sufrido un infarto anteriormente')
