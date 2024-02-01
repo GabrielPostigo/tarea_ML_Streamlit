@@ -38,10 +38,11 @@ else:
 
 
 if st.button('Submit'):
-    X = pd.DataFrame([[gender,age,hiper,heart,marry,work,glucosa,imc,smoke]],columns=['gender','age','hypertension','heart_disease','ever_married','work_type','avg_glucose_level','bmi','smoking_status'])
-    X = X.replace(['Hombre','Mujer'],[0,1])
-    X = X.replace(['Joven', 'Funcionario', 'Desempleado','Privado','Autónomo'],[0,1,2,3,4])
-    X = X.replace(['A veces', 'Nunca', 'Habitual','Desconocido'],[0,1,2,3])
+    # X = pd.DataFrame([[gender,age,hiper,heart,marry,work,glucosa,imc,smoke]],columns=['gender','age','hypertension','heart_disease','ever_married','work_type','avg_glucose_level','bmi','smoking_status'])
+    # X = X.replace(['Hombre','Mujer'],[0,1])
+    # X = X.replace(['Joven', 'Funcionario', 'Desempleado','Privado','Autónomo'],[0,1,2,3,4])
+    # X = X.replace(['A veces', 'Nunca', 'Habitual','Desconocido'],[0,1,2,3])
+    X = pd.DataFrame([[0.0,74.00,1.0,1.0,0.0,0.0,70.09,27.4,0.0]],columns=['gender','age','hypertension','heart_disease','ever_married','work_type','avg_glucose_level','bmi','smoking_status'])
     res = clf.predict(X)
     if res == 0:
         st.write('No ha sufrido un infarto antes')
